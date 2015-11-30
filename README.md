@@ -12,26 +12,19 @@ Transform the results of an api with the transformer functions provided
 
 ## Usage
 
-See [live playground](https://tonicdev.com/javiercejudo/api-result-transformer/5.0.0).
-
 ```js
-var lc = require('api-result-transformer');
-var temp = lc.PRESETS.temperature.conversions;
-var cToF = lc.conversion(temp, 'celsius', 'fahrenheit');
+var apiResultTransformer = require('api-result-transformer');
 
-lc.convert(cToF, 25).toFixed(3); // => '77.000'
+var floatApi = {
+  add: function(a, b) {
+    return a + b;
+  }
+};
 
-// f(x) = 3x + 1
-lc.convert([[0, 1], [1, 4]], 5); // => 16
+var integerApi = apiResultTransformer({
+  add: Math.round
+}, floatApi);
+
+floatApi.add(Math.PI, 2); // => Math.PI + 2
+integerApi.add(Math.PI, 2); // => 5
 ```
-
-Unlike *linear-converter*, *api-result-transformer* always returns primitive numbers.
-
-See [CodePen example](http://codepen.io/javiercejudo/pen/ojjroJ?editors=101).
-
-For more documentation, see [linear-converter](https://github.com/javiercejudo/linear-converter).
-
-## Related projects
-
-- [linear-converter](https://github.com/javiercejudo/linear-converter): flexible linear converter.
-- [linear-presets](https://github.com/javiercejudo/linear-presets): linear presets for common units.
