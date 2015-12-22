@@ -16,9 +16,7 @@ Transform the results of an api with the transformer functions provided
 var apiResultTransformer = require('api-result-transformer');
 
 var floatApi = {
-  add: function(a, b) {
-    return a + b;
-  }
+  add: (a, b) => a + b
 };
 
 var integerApi = apiResultTransformer({
